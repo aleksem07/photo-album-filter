@@ -6,7 +6,7 @@
         placeholder="Введите ID альбомов (например: 1 2 3)"
         class="flex-1 border border-zinc-300 dark:border-zinc-600 rounded px-3 py-2 outline-none"
         @keyup.enter="onSearch"
-        type="number"
+        type="text"
       />
       <button
           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50"
@@ -36,11 +36,15 @@ import PhotoTable from "../components/PhotoTable.vue";
 const photoStore = usePhotoStore();
 const { photos, isLoading: loading, error, albumIds } = storeToRefs(photoStore)
 
-const inputValue = ref(albumIds.value.join(' '))
+const inputValue = ref('')
+if (Array.isArray(albumIds.value)) {
+  inputValue.value = albumIds.value.join(' ')
+}
+
 
 const parseAlbumInput = () => {
-  return inputValue
-      .value.split(' ')
+  return String(inputValue.value)
+      .split(' ')
       .map(id => parseInt(id.trim()))
       .filter(id => !isNaN(id))
 }
