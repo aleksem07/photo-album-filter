@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full max-w-xl">
-    <div class="flex gap-2 mb-4">
+  <div class="w-full max-w-[600px]">
+    <div class="flex  gap-2 mb-4">
       <input
         v-model="inputValue"
         placeholder="Введите ID альбомов (например: 1 2 3)"
@@ -9,7 +9,7 @@
         type="text"
       />
       <button
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50"
+          class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded disabled:opacity-50"
           :disabled="loading"
           @click="onSearch">
         <span v-if="!loading">Поиск</span>

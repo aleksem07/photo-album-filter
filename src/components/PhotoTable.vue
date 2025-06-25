@@ -1,6 +1,6 @@
 <template>
   <div
-      class="border border-zinc-300 rounded max-h-[600px] overflow-y-auto"
+      class="border border-zinc-300 rounded max-h-[600px] max-w-[600px] overflow-y-auto"
       @scroll="handleScroll"
       ref="tableContainer"
   >
