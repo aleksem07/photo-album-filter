@@ -5,7 +5,7 @@
   >
     <div class="w-full max-w-[600px] flex items-center justify-between mb-4">
       <h1 class="text-2xl font-semibold">
-        Фото альбомы
+        ФотоПоток
       </h1>
       <ThemeToggle :isDark="isDark" @toggle="toggleTheme" />
     </div>

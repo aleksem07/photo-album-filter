@@ -1,0 +1,2 @@
+- [ ] add icons
+- [x] add favicon
