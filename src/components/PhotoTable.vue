@@ -93,7 +93,8 @@ watch(
     () => props.photos,
     () => {
       visibleCount.value = LIMIT
-    }
+    },
+    { deep: true }
 )
 
 onMounted(() => {

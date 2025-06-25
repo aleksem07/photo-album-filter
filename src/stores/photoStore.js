@@ -30,13 +30,13 @@ export const usePhotoStore = defineStore("photo", {
         setAlbumIds(ids) {
            this.albumIds = ids;
         },
-        setSort(key) {
-            if (this.sortKey === key) {
-                this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc"
-            } else {
-                this.sortKey = key;
-                this.sortOrder = "asc"
-            }
+        setSort(key, asc) {
+            this.photos = [...this.photos].sort((a, b) => {
+                const valA = a[key]
+                const valB = b[key]
+                if (valA === valB) return 0
+                return (valA > valB ? 1 : -1) * (asc ? 1 : -1)
+            })
         }
     },
     getters: {

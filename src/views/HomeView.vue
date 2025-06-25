@@ -28,26 +28,27 @@
 
 
 <script setup>
-import {ref, onMounted} from "vue";
-import {usePhotoStore} from "../stores/photoStore.js";
-import {storeToRefs} from "pinia";
-import PhotoTable from "../components/PhotoTable.vue";
+import { ref, onMounted } from 'vue'
+import { usePhotoStore } from '../stores/photoStore.js'
+import { storeToRefs } from 'pinia'
+import PhotoTable from '../components/PhotoTable.vue'
 
-const photoStore = usePhotoStore();
+const photoStore = usePhotoStore()
 const { photos, isLoading: loading, error, albumIds } = storeToRefs(photoStore)
 
 const inputValue = ref('')
+const sortKey = ref(null)
+const sortAsc = ref(true)
+
 if (Array.isArray(albumIds.value)) {
   inputValue.value = albumIds.value.join(' ')
 }
 
-
-const parseAlbumInput = () => {
-  return String(inputValue.value)
-      .split(' ')
-      .map(id => parseInt(id.trim()))
-      .filter(id => !isNaN(id))
-}
+const parseAlbumInput = () =>
+    String(inputValue.value)
+        .split(' ')
+        .map(id => parseInt(id.trim()))
+        .filter(id => !isNaN(id))
 
 function onSearch() {
   const ids = parseAlbumInput()
@@ -56,7 +57,13 @@ function onSearch() {
 }
 
 function onSort(key) {
-  photoStore.setSort(key)
+  if (sortKey.value === key) {
+    sortAsc.value = !sortAsc.value
+  } else {
+    sortKey.value = key
+    sortAsc.value = true
+  }
+  photoStore.setSort(key, sortAsc.value)
 }
 
 onMounted(() => {
@@ -64,5 +71,4 @@ onMounted(() => {
     photoStore.fetchPhotos()
   }
 })
-
 </script>
