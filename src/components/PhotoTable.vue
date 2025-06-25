@@ -16,8 +16,36 @@
               class="cursor-pointer px-2 py-2 text-center hover:bg-blue-600 hover:text-white transition whitespace-nowrap"
               :style="{ width: column.width }"
           >
-            {{ column.label }}
+            <div class="flex items-center justify-center gap-1">
+              <span>{{ column.label }}</span>
+
+              <span v-if="props.sortKey === column.key">
+      <svg
+          v-if="props.sortAsc"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-3 h-3"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+      </svg>
+      <svg
+          v-else
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-3 h-3"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </span>
+            </div>
           </th>
+
         </tr>
         </thead>
         <tbody>
@@ -71,7 +99,9 @@ const props = defineProps({
     type: Array,
     required: true
   },
-    isDark: Boolean
+    isDark: Boolean,
+    sortKey: String,
+    sortAsc: Boolean
 })
 
 const emit = defineEmits(['sort'])

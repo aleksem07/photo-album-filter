@@ -28,7 +28,13 @@
       {{ error }}
     </div>
 
-    <PhotoTable :isDark="isDark"  v-if="!loading" :photos="photos" @sort="onSort" />
+    <PhotoTable :isDark="isDark"
+                v-if="!loading"
+                :photos="photos"
+                :sort-key="sortKey"
+                :sort-asc="sortAsc"
+                @sort="onSort"
+    />
 
   </div>
 </template>
@@ -72,7 +78,7 @@ function onSort(key) {
     sortAsc.value = !sortAsc.value
   } else {
     sortKey.value = key
-    sortAsc.value = true
+    sortAsc.value = false
   }
   photoStore.setSort(key, sortAsc.value)
 }
