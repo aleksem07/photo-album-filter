@@ -21,7 +21,7 @@
       {{ error }}
     </div>
 
-    <PhotoTable v-if="!loading" :photos="photos" @sort="onSort" />
+    <PhotoTable :isDark="isDark"  v-if="!loading" :photos="photos" @sort="onSort" />
 
   </div>
 </template>
@@ -35,6 +35,10 @@ import PhotoTable from '../components/PhotoTable.vue'
 
 const photoStore = usePhotoStore()
 const { photos, isLoading: loading, error, albumIds } = storeToRefs(photoStore)
+
+const props = defineProps({
+  isDark: Boolean
+})
 
 const inputValue = ref('')
 const sortKey = ref(null)

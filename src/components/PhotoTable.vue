@@ -6,13 +6,14 @@
   >
     <template v-if="visiblePhotos.length">
       <table class="w-full text-left text-sm table-fixed">
-        <thead class="bg-zinc-100 text-zinc-700 sticky top-0 z-10">
+        <thead class="bg-zinc-100 sticky top-0 z-10"
+               :class="isDark ? 'bg-zinc-100 text-zinc-700' : 'bg-zinc-900 text-white'">
         <tr>
           <th
               v-for="column in columns"
               :key="column.key"
               @click="() => emit('sort', column.key)"
-              class="cursor-pointer px-2 py-2 text-center hover:bg-blue-600 hover:text-white  transition  whitespace-nowrap"
+              class="cursor-pointer px-2 py-2 text-center hover:bg-blue-600 hover:text-white transition whitespace-nowrap"
               :style="{ width: column.width }"
           >
             {{ column.label }}
@@ -69,7 +70,8 @@ const props = defineProps({
   photos: {
     type: Array,
     required: true
-  }
+  },
+    isDark: Boolean
 })
 
 const emit = defineEmits(['sort'])
